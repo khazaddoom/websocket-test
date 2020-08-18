@@ -73,10 +73,12 @@ const echoMessage = async (event, context, cb) => {
     endpoint: `https://${event.requestContext.domainName}/${event.requestContext.stage}`
   });
 
+  const body = JSON.parse(event.body)
+
   await client
     .postToConnection({
       ConnectionId: event.requestContext.connectionId,
-      Data: `What i got was just: ${event.body}`
+      Data: `What i got was just: ${body.message}`
     })
     .promise();
 
