@@ -1,0 +1,31 @@
+service: cricket-websockets-nonvpc
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: ap-south-1
+  role: arn:aws:iam::667505010803:role/cricketmania-role
+  vpc:
+    securityGroupIds:
+      - sg-0666adccfd087e375
+    subnetIds:
+      - subnet-0f31c5f562806ea28
+      - subnet-0ae98dfbeb28f2248
+
+
+functions:
+  cricket-websockets-test:
+    handler: handler.handle_all
+    events:
+      - websocket:
+          route: $connect
+
+      - websocket:
+          route: $default
+
+      - websocket:
+          route: $disconnect
+
+      - websocket:
+          route: message
