@@ -68,9 +68,11 @@ const defaultFunction = async (event, context, cb) => {
 
 const echoMessage = async (event, context, cb) => {
 
+  console.log(event)
+
   const client = new AWS.ApiGatewayManagementApi({
     apiVersion: '2018-11-29',
-    endpoint: `https://${event.requestContext.domainName}/${event.requestContext.stage}`
+    endpoint: `https://${event.requestContext.domainName}/CRICKET/`
   });
 
   const body = JSON.parse(event.body)
